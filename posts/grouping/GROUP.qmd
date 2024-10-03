@@ -1,0 +1,66 @@
+---
+title: "Groups"
+author: "Raina"
+---
+
+## Abalysing Math Anxiety Data
+
+```{r}
+math_anxiety <-read_csv("../data/MathAnxiety.csv")
+```
+
+```{r}
+#| label: setup
+library(tidyverse)
+library("ggformula")
+library("mosaic")
+library("kableExtra")
+
+```
+
+```{r}
+math_anxiety <-read_csv("../data/MathAnxiety.csv")
+```
+
+```{r}
+math_anxiety <- read_delim(file="../data/MathAnxiety.csv", delim=";")
+math_anxiety
+```
+
+```{r}
+```
+
+```{r}
+math_anxiety %>%
+  group_by(Age,Gender,Grade) %>%
+  summarize(AMAS = mean(AMAS), count = n())
+```
+
+```{r}
+math_anxiety %>%
+  group_by(Age,Gender,Grade) %>%
+  summarize(RCMAS = mean(RCMAS), count = n())
+```
+
+```{r}
+math_anxiety %>%
+  group_by(Age,Gender,Grade) %>%
+  summarize(Arith = mean(Arith), count = n())
+```
+
+```{r}
+math_anxiety %>%
+  group_by(Age,Grade) %>%
+  summarize(AMAS = mean(AMAS), count = n())
+```
+
+```{r}
+math_anxiety %>% 
+  group_by(Gender) %>% 
+  summarise(
+    avg_AMAS=mean(AMAS),
+    avg_RCMAS=mean(RCMAS),
+    avg_Arith=mean(Arith),
+    count=n()
+  )
+```

@@ -1,0 +1,49 @@
+---
+title: "My name is RG"
+author: "Raina"
+---
+
+## Introduction
+
+This is a ridiculous piece I am writing in Arvind's class.He is making things difficult for me.
+
+## My first piece of R code
+
+```{r}
+#| label: setup
+ library(tidyverse)
+ library(ggformula)
+ library(babynames)
+```
+
+```{r}
+babynames
+```
+
+```{r}
+babynames  %>% filter(name== "Raina")
+```
+
+```{r}
+babynames %>% filter(name== "Aditi") %>% 
+  gf_line(n ~ year)
+```
+
+```         
+```
+
+```{r}
+babynames %>% filter(name == "Raina" | name == "Rayna")
+
+```
+
+```{r}
+babynames %>% filter(name == "Raina" | name == "Rayna") %>% 
+  gf_line(n ~ year, color = ~name)
+```
+
+```{r}
+#| label: setup
+
+ 
+```

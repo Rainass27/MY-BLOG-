@@ -1,0 +1,62 @@
+---
+title: "This summaries"
+author: "raina"
+---
+
+## Intro
+
+This is the classwork on summarising data.
+
+```{r}
+#| label: setup
+library(tidyverse)
+library("ggformula")
+library("mosaic")
+library("kableExtra")
+
+```
+
+## Look at the mpg dataset
+
+```{r}
+mpg
+```
+
+```{r}
+glimpse(mpg)
+```
+
+```{r}
+inspect(mpg)
+```
+```{r}
+skimr :: skim (mpg)
+```
+```{r}
+glimpse(mpg)
+
+mpg %>% glimpse()
+```
+```{r}
+mpg_modified <- mpg %>%
+  dplyr::mutate(
+    cyl = as_factor(cyl),
+    fl = as_factor(fl),
+    drv = as_factor(drv),
+    class = as_factor(class),
+    trans = as_factor(trans)
+  )
+glimpse(mpg_modified)
+```
+```{r}
+mpg_modified %>%
+  group_by(cyl) %>%
+  summarize(average_hwy = mean(hwy), count = n())
+```
+```{r}
+mpg_modified %>%
+  group_by(cyl, fl) %>%
+  summarize(average_cty = mean(cty), count = n())
+```
+
+  

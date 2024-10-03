@@ -1,0 +1,209 @@
+---
+title: "class 3 courts and stuff"
+author: "raina"
+---
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+library(ggformula)
+library(mosaic)
+
+
+```
+
+```{r}
+taxi <- read_csv("https://vincentarelbundock.github.io/Rdatasets/csv/modeldata/taxi.csv")
+taxi
+```
+
+```{r}
+glimpse(taxi)
+inspect(taxi)
+
+```
+
+```{r}
+
+ ## Convert `dow`, `local`, and `month` into ordered factors
+taxi_modified <- taxi %>%
+  mutate(
+    dow = factor(dow,
+      levels = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"),
+      labels = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"),
+      ordered = TRUE
+    ),
+    ##
+    local = factor(local,
+      levels = c("no", "yes"),
+      labels = c("no", "yes"),
+      ordered = TRUE
+    ),
+    ##
+    month = factor(month,
+      levels = c("Jan", "Feb", "Mar", "Apr"),
+      labels = c("Jan", "Feb", "Mar", "Apr"),
+      ordered = TRUE
+    )
+  )
+taxi_modified %>% glimpse() 
+```
+
+```{r}
+gf_bar(~tip, data = taxi_modified) %>%
+  gf_labs(title = "Plot 1A: Counts of Tips")
+```
+
+```{r}
+taxi_modified %>%
+  gf_bar(~local,
+    fill = ~tip,
+    position = "dodge"
+  ) %>%
+  gf_labs(title = "Plot 2A: Dodged Bar Chart")
+```
+
+```{r}
+taxi_modified %>%
+  gf_bar(~local,
+    color = ~tip,
+    position = "dodge"
+  ) %>%
+  gf_labs(title = "Plot 2A: Dodged Bar Chart")
+```
+
+```{r}
+taxi_modified %>%
+  gf_bar(~local,
+    color = ~tip,
+    
+  ) %>%
+  gf_labs(title = "Plot 2A: Dodged Bar Chart")
+```
+
+```{r}
+taxi_modified %>%
+  gf_bar(~local,
+    color = ~tip,
+    position = "dodge"
+  ) %>%
+  gf_labs(title = "Plot 2A: Dodged Bar Chart")
+
+```
+
+```{r}
+
+taxi_modified %>%
+  gf_bar(~local,
+    fill = ~tip,
+    position = "stack"
+  ) %>%
+  gf_labs(
+    title = "Plot 2B: Stacked Bar Chart",
+    subtitle = "Can we spot per group differences in proportions??"
+  )
+```
+
+```{r}
+taxi_modified %>%
+  gf_bar(~local,
+    fill = ~tip,
+    position = "fill"
+  ) %>%
+  gf_labs(
+    title = "Plot 2C: Filled Bar Chart",
+    subtitle = "Shows Per group differences in Proportions!"
+  )
+```
+
+```{r}
+
+taxi_modified %>%
+  gf_bar(~company,
+    fill = ~tip,
+    position = "dodge"
+  ) %>%
+  gf_labs(title = "Plot 2A: Dodged Bar Chart") %>%
+  gf_theme(theme(axis.text.x = element_text(size = 6, angle = 45, hjust = 1)))
+```
+
+```{r}
+
+
+taxi_modified %>%
+  gf_bar(~company,
+    fill = ~tip,
+    position = "stack"
+  ) %>%
+  gf_labs(
+    title = "Plot 2B: Stacked Bar Chart",
+    subtitle = "Can we spot per group differences in proportions??"
+  ) %>%
+  gf_theme(theme(axis.text.x = element_text(size = 6, angle = 45, hjust = 1)))
+```
+
+```{r}
+
+taxi_modified %>%
+  gf_bar(~company,
+    fill = ~tip,
+    position = "fill"
+  ) %>%
+  gf_labs(
+    title = "Plot 2D: Filled Bar Chart",
+    subtitle = "Shows Per group differences in Proportions!"
+  ) %>%
+  gf_theme(theme(axis.text.x = element_text(size = 6, angle = 45, hjust = 1)))
+```
+
+```{r}
+gf_bar(~hour, fill = ~tip, data = taxi_modified) %>%
+  gf_labs(title = "Plot B: Counts of Tips by Hour")
+```
+
+```{r}
+gf_bar(~dow, fill = ~tip, data = taxi_modified) %>%
+  gf_labs(title = "Plot C: Counts of Tips by Day of Week")
+```
+
+```{r}
+gf_bar(~month, fill = ~tip, data = taxi_modified) %>%
+  gf_labs(title = "Plot D: Counts of Tips by Month")
+```
+
+```{r}
+gf_bar(~ month | dow, fill = ~tip, data = taxi_modified) %>%
+  gf_labs(title = "Plot E: Counts of Tips by Day of Week and Month")
+```
+
+```{r}
+gf_bar(~ dow | hour, fill = ~tip, data = taxi_modified,
+       position='fill') %>%
+  gf_labs(
+    title = "Plot F: Counts of Tips by Hour and Day of Week",
+    subtitle = "Is this plot arrangement easy to grasp?"
+  )
+```
+
+```{r}
+
+gf_bar(~ hour | dow, fill = ~tip, data = taxi_modified,position='fill') %>%
+  gf_labs(
+    title = "Plot G: Counts of Tips by Hour and Day of Week",
+    subtitle = "Swapped the Facets"
+  )
+```
+
+```{r}
+library(skimr)
+```
+
+```{r}
+data('HELPrct')
+HELPrct
+```
+
+```{r}
+install.packages("usethis"
+```
