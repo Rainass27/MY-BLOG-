@@ -21,7 +21,7 @@ babynames
 ```
 
 ```{r}
-babynames  %>% filter(name== "Raina")
+babynames%>% filter(name== "Raina")
 ```
 
 ```{r}
@@ -42,8 +42,4 @@ babynames %>% filter(name == "Raina" | name == "Rayna") %>%
   gf_line(n ~ year, color = ~name)
 ```
 
-```{r}
-#| label: setup
 
- 
-```

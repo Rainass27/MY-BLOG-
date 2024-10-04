@@ -3,12 +3,6 @@ title: "Groups"
 author: "Raina"
 ---
 
-## Abalysing Math Anxiety Data
-
-```{r}
-math_anxiety <-read_csv("../data/MathAnxiety.csv")
-```
-
 ```{r}
 #| label: setup
 library(tidyverse)

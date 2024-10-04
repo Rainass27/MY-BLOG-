@@ -1,0 +1,58 @@
+---
+title: "histogram"
+author: "raina"
+---
+
+```{r}
+library(tidyverse)
+library(mosaic)
+library(ggformula)
+library(skimr)
+library(crosstable)
+```
+
+```{r}
+glimpse(diamonds)
+```
+
+```{r}
+skim(diamonds)
+```
+
+```{r}
+gf_histogram(~price, data = diamonds) %>%
+  gf_labs(
+    title = "Plot 1A: Diamond Prices",
+    caption = "ggformula"
+  )
+```
+
+```{r}
+gf_histogram(~price,
+  data = diamonds,
+  bins = 100
+) %>%
+  gf_labs(
+    title = "Plot 1B: Diamond Prices",
+    caption = "ggformula"
+  )
+```
+
+```{r}
+
+diamonds %>%
+  gf_histogram(~carat) %>%
+  gf_labs(
+    title = "Plot 2A: Carats of Diamonds",
+    caption = "ggformula"
+  )
+```
+
+```{r}
+diamonds %>%
+  gf_histogram(~carat,bins=100) %>%
+  gf_labs(
+    title = "Plot 2A: Carats of Diamonds",
+    caption = "ggformula"
+  )
+```
