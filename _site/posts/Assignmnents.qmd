@@ -1,0 +1,185 @@
+---
+title: "Assignments"
+author: "Raina"
+---
+
+## Assignments-
+
+## Apartments Dataset
+
+```{r}
+library(tidyverse)
+library(mosaic)
+library(ggformula)
+library(skimr)
+library(crosstable)
+library(knitr)
+library(kableExtra)
+```
+
+```{r}
+apartments <- read.csv("apartments.csv",sep = ";")
+```
+
+```{r}
+glimpse(apartments)
+skim(apartments)
+```
+
+```{r}
+head(apartments)
+tail(apartments)
+```
+
+```{r}
+ggplot(apartments,aes(x=GrLivArea)) +
+  geom_histogram()
+```
+
+```{r}
+#  histogram of the SalePrice column
+gf_histogram(~ SalePrice, data = apartments, bins = 30) +
+  labs(title = "Histogram of Sale Prices",
+       x = "Sale Price",
+       y = "Frequency")
+```
+
+```{r}
+#  histogram of the Living Area (GrLivArea)
+gf_histogram(~ GrLivArea, data = apartments, bins = 30) +
+  labs(title = "Histogram of Living Area",
+       x = "Living Area (sq ft)",
+       y = "Frequency")
+```
+
+```{r}
+# Bar plot for apartment types 
+gf_bar(~ GrLivArea, data = apartments) +
+  labs(title = "Distribution of Apartments by Type",
+       x = "Apartment Type",
+       y = "Count")
+```
+
+```{r}
+#What is the distribution of apartments based on different sale price ranges?
+apartments <- apartments %>%
+  mutate(SalePrice = cut(SalePrice,
+                             breaks = c(0, 100000, 300000, 500000, Inf),
+                             labels = c("Low", "Medium", "High", "Very High")))
+gf_bar(~ SalePrice, data = apartments) +
+  labs(title = "Distribution of Apartments by Sale Price Category",
+       x = "Sale Price Category",
+       y = "Count")
+```
+
+```{r}
+#What is the distribution of apartments based on different area sizes?
+apartments <- apartments %>%
+  mutate(GrLivArea = cut(GrLivArea,
+                            breaks = c(0, 500, 1000, 1500, 2000, Inf),
+                            labels = c("Very Small", "Small", "Medium", "Large", "Very Large")))
+gf_bar(~ GrLivArea, data = apartments) +
+  labs(title = "Distribution of Apartments by Area Category",
+       x = "Area Category",
+       y = "Count")
+```
+
+```{r}
+#What is the distribution of apartments where the area is above or below a certain threshold (e.g., 1000 sq ft)?
+
+apartments <- apartments %>%
+  mutate(GrLivArea = ifelse(GrLivArea > 1000, "Above 1000 sq ft", "Below 1000 sq ft"))
+
+gf_bar(~ GrLivArea, data = apartments) +
+  labs(title = "Distribution of Apartments by Area (Above or Below 1000 sq ft)",
+       x = "Area Category",
+       y = "Count")
+
+```
+
+```{r}
+apartments %>%
+  gf_bar(~SalePrice,
+    fill = ~GrLivArea,
+    position = "dodge"
+  ) %>%
+  gf_labs(title = "Plot 2A: Dodged Bar Chart")
+```
+
+## StarTrek dataset
+
+```{r}
+StarTrek <- read.csv("StarTrek.csv", sep=";")
+
+```
+
+```{r}
+glimpse(StarTrek)
+```
+
+<<<<<<< HEAD:_site/posts/Assignmnents_files/Assignmnents.qmd
+=======
+
+>>>>>>> 16a4b74 (Initial commit):posts/My name is Raina/Assignmnents_files/Assignmnents.qmd
+```{r}
+StarTrek %>%
+  head(10) %>%
+  kbl(
+    # add Human Readable column names
+    col.names = c(
+      "Title", "Date", "Author",
+      "Publisher", "Identifier", "Series",
+      "Subseries", "Nchap", "Nword",
+      "Nchar", "Dedication"
+    ),
+    caption = "StarTrek Dataset"
+  ) %>%
+  kable_styling(
+    bootstrap_options = c(
+      "striped", "hover",
+      "condensed", "responsive"
+    ),
+    full_width = F, position = "center"
+  )
+```
+
+```{r}
+StarTrek_modified <- StarTrek %>%
+  mutate(
+    title = as_factor(title),
+    author = as_factor(author),
+    date = as_factor(date),
+    publisher = as_factor(publisher),
+    identifier = as_factor(identifier),
+    series = as_factor(series)
+  )
+<<<<<<< HEAD:_site/posts/Assignmnents_files/Assignmnents.qmd
+=======
+StarTrek_modified
+>>>>>>> 16a4b74 (Initial commit):posts/My name is Raina/Assignmnents_files/Assignmnents.qmd
+```
+
+```{r}
+StarTrek_modified %>% dplyr::count(author)
+```
+
+```{r}
+StarTrek_modified %>% mosaic::count(author) # does the same thing! Counts!
+```
+
+```{r}
+skim(StarTrek) %>%
+  kbl(align = "c", caption = "Skim Output for StarTrek Dataset") %>%
+  kable_paper(full_width = F)
+```
+
+```{r}
+usethis::use_git()
+```
+<<<<<<< HEAD:_site/posts/Assignmnents_files/Assignmnents.qmd
+
+
+
+
+=======
+>>>>>>> 16a4b74 (Initial commit):posts/My name is Raina/Assignmnents_files/Assignmnents.qmd
